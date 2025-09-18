@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(180deg, #0a0a2e 0%, #16213e 50%, #1a1a3a 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Estrellas */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite alternate;
+        }
+
+        .star:nth-child(odd) {
+            animation-duration: 3s;
+        }
+
+        .star:nth-child(even) {
+            animation-duration: 1.5s;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Cometas */
+        .comet {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #fff, -20px 0 30px rgba(255,255,255,0.3);
+            animation: comet-move 8s linear infinite;
+        }
+
+        .comet::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50px;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8));
+            border-radius: 2px;
+        }
+
+        @keyframes comet-move {
+            0% {
+                transform: translateX(-100px) translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 100px));
+                opacity: 0;
+            }
+        }
+
+        /* Improved flower sizing and positioning for better centering */
+        .flower {
+            position: absolute;
+            width: clamp(70px, 9vw, 110px);
+            height: clamp(70px, 9vw, 110px);
+            animation: flower-gentle-move 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(255, 235, 59, 0.3));
+        }
+
+        .flower.center {
+            width: clamp(120px, 15vw, 180px);
+            height: clamp(120px, 15vw, 180px);
+            z-index: 10;
+            filter: drop-shadow(0 6px 12px rgba(255, 235, 59, 0.4));
+        }
+
+        .flower.center .flower-center {
+            width: clamp(32px, 4vw, 48px);
+            height: clamp(32px, 4vw, 48px);
+            background: radial-gradient(circle, #ff8f00 0%, #ffa500 50%, #ff6f00 100%);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.6);
+        }
+
+        .flower.center .petal {
+            width: clamp(30px, 3.8vw, 46px);
+            height: clamp(48px, 6vw, 72px);
+        }
+
+        .flower-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: clamp(16px, 2vw, 24px);
+            height: clamp(16px, 2vw, 24px);
+            background: radial-gradient(circle, #ff8f00 0%, #ffa500 50%, #ff6f00 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+        }
+
+        .petal {
+            position: absolute;
+            width: clamp(20px, 2.5vw, 32px);
+            height: clamp(32px, 4vw, 50px);
+            background: linear-gradient(45deg, #ffeb3b 0%, #fdd835 50%, #f9a825 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            top: 50%;
+            left: 50%;
+            transform-origin: center bottom;
+            animation: petal-dance 3s ease-in-out infinite;
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .petal:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+        .petal:nth-child(2) { transform: translate(-50%, -100%) rotate(45deg); }
+        .petal:nth-child(3) { transform: translate(-50%, -100%) rotate(90deg); }
+        .petal:nth-child(4) { transform: translate(-50%, -100%) rotate(135deg); }
+        .petal:nth-child(5) { transform: translate(-50%, -100%) rotate(180deg); }
+        .petal:nth-child(6) { transform: translate(-50%, -100%) rotate(225deg); }
+        .petal:nth-child(7) { transform: translate(-50%, -100%) rotate(270deg); }
+        .petal:nth-child(8) { transform: translate(-50%, -100%) rotate(315deg); }
+
+        /* Making moon responsive with viewport units */
+        .moon {
+            position: absolute;
+            top: clamp(5%, 8vh, 10%);
+            right: clamp(5%, 10vw, 15%);
+            width: clamp(80px, 12vw, 140px);
+            height: clamp(80px, 12vw, 140px);
+            background: radial-gradient(circle at 30% 30%, #f5f5dc 0%, #e6e6c8 70%, #d4d4aa 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 40px rgba(245, 245, 220, 0.6), inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+            animation: moon-glow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes moon-glow {
+            0% { box-shadow: 0 0 40px rgba(245, 245, 220, 0.6), inset -10px -10px 20px rgba(0, 0, 0, 0.1); }
+            100% { box-shadow: 0 0 60px rgba(245, 245, 220, 0.9), inset -10px -10px 20px rgba(0, 0, 0, 0.1); }
+        }
+
+        /* Repositioned YouTube container to center-left */
+        .youtube-container {
+            position: absolute;
+            top: 50%;
+            left: clamp(20px, 5vw, 50px);
+            transform: translateY(-50%);
+            width: clamp(300px, 35vw, 420px);
+            height: clamp(225px, 26.25vw, 315px);
+            border-radius: clamp(8px, 1.5vw, 15px);
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 235, 59, 0.2);
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 235, 59, 0.4);
+        }
+
+        .youtube-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Making grass circle responsive with viewport units */
+        .grass-circle {
+            position: absolute;
+            width: clamp(350px, 45vw, 550px);
+            height: clamp(350px, 45vw, 550px);
+            background: radial-gradient(ellipse 60% 40% at 30% 30%, #81c784 0%, #66bb6a 30%, #4caf50 60%, #388e3c 80%, #2e7d32 100%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            box-shadow: 
+                inset -30px -30px 60px rgba(0, 0, 0, 0.4),
+                inset 20px 20px 40px rgba(255, 255, 255, 0.1),
+                0 0 80px rgba(76, 175, 80, 0.3);
+            animation: planet-rotate 20s linear infinite;
+        }
+
+        .grass-circle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 20% 15% at 25% 25%, rgba(129, 199, 132, 0.8) 0%, transparent 50%),
+                radial-gradient(ellipse 15% 10% at 70% 40%, rgba(102, 187, 106, 0.6) 0%, transparent 50%),
+                radial-gradient(ellipse 25% 20% at 60% 70%, rgba(76, 175, 80, 0.7) 0%, transparent 50%),
+                repeating-conic-gradient(
+                    from 0deg,
+                    rgba(76, 175, 80, 0.1) 0deg 2deg,
+                    rgba(102, 187, 106, 0.1) 2deg 4deg,
+                    rgba(76, 175, 80, 0.1) 4deg 6deg
+                );
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .grass-circle::after {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(ellipse 50% 30% at 40% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        @keyframes planet-rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes flower-sway {
+            0%, 100% { transform: rotate(-5deg) translateY(0px); }
+            50% { transform: rotate(5deg) translateY(-10px); }
+        }
+
+        @keyframes petal-dance {
+            0%, 100% { transform: translate(-50%, -100%) rotate(var(--rotation)) scale(1); }
+            50% { transform: translate(-50%, -100%) rotate(var(--rotation)) scale(1.1); }
+        }
+
+        @keyframes flower-gentle-move {
+            0%, 100% { transform: translateY(0px) rotate(-3deg); }
+            50% { transform: translateY(-8px) rotate(3deg); }
+        }
+
+        /* Moved title below center and enhanced styling */
+        .main-title {
+            position: absolute;
+            bottom: clamp(80px, 12vh, 120px);
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-weight: 700;
+            color: #ffe082;
+            text-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(255, 212, 79, 0.6),
+                0 0 60px rgba(255, 212, 79, 0.3);
+            letter-spacing: clamp(2px, 0.3vw, 4px);
+            z-index: 20;
+            padding: clamp(8px, 1.5vw, 15px) clamp(20px, 4vw, 40px);
+            background: rgba(30, 30, 60, 0.7);
+            border-radius: clamp(15px, 3vw, 25px);
+            border: 3px solid #ffd54f;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            animation: title-glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes title-glow {
+            0% { 
+                text-shadow: 
+                    0 4px 12px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(255, 212, 79, 0.6),
+                    0 0 60px rgba(255, 212, 79, 0.3);
+            }
+            100% { 
+                text-shadow: 
+                    0 4px 12px rgba(0, 0, 0, 0.8),
+                    0 0 40px rgba(255, 212, 79, 0.8),
+                    0 0 80px rgba(255, 212, 79, 0.5);
+            }
+        }
+
+        /* Adding media queries for better mobile experience */
+        @media (max-width: 768px) {
+            .youtube-container {
+                width: clamp(280px, 80vw, 350px);
+                height: clamp(210px, 60vw, 262px);
+                left: 50%;
+                transform: translate(-50%, -50%);
+                top: 25%;
+            }
+            
+            .main-title {
+                bottom: clamp(80px, 15vh, 120px);
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+                padding: clamp(6px, 1.2vw, 12px) clamp(15px, 3vw, 25px);
+            }
+            
+            .moon {
+                width: clamp(60px, 10vw, 100px);
+                height: clamp(60px, 10vw, 100px);
+                top: clamp(3%, 5vh, 8%);
+                right: clamp(3%, 8vw, 12%);
+            }
+
+            .grass-circle {
+                width: clamp(320px, 50vw, 480px);
+                height: clamp(320px, 50vw, 480px);
+                top: 55%;
+            }
+
+            .audio-container {
+                top: 8px;
+                width: clamp(160px, 92vw, 340px);
+                padding: 8px 0 7px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .youtube-container {
+                width: clamp(260px, 85vw, 320px);
+                height: clamp(195px, 63.75vw, 240px);
+                top: 20%;
+            }
+            
+            .flower {
+                width: clamp(45px, 10vw, 70px);
+                height: clamp(45px, 10vw, 70px);
+            }
+            
+            .flower.center {
+                width: clamp(80px, 16vw, 120px);
+                height: clamp(80px, 16vw, 120px);
+            }
+            
+            .grass-circle {
+                width: clamp(280px, 60vw, 400px);
+                height: clamp(280px, 60vw, 400px);
+                top: 58%;
+            }
+
+            .main-title {
+                bottom: clamp(60px, 12vh, 100px);
+                font-size: clamp(1.2rem, 7vw, 2rem);
+            }
+
+            .audio-container {
+                top: 4px;
+                width: clamp(120px, 98vw, 260px);
+                padding: 5px 0 4px 0;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .youtube-container {
+                width: clamp(240px, 90vw, 300px);
+                height: clamp(180px, 67.5vw, 225px);
+                top: 18%;
+            }
+
+            .grass-circle {
+                width: clamp(250px, 65vw, 350px);
+                height: clamp(250px, 65vw, 350px);
+                top: 60%;
+            }
+
+            .main-title {
+                bottom: clamp(40px, 10vh, 80px);
+                font-size: clamp(1rem, 8vw, 1.8rem);
+            }
+
+            .audio-container {
+                top: 4px;
+                width: clamp(120px, 98vw, 260px);
+                padding: 4px 0;
+            }
+        }
+
+        /* Adding landscape orientation support for mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .main-title {
+                bottom: clamp(20px, 6vh, 60px);
+                font-size: clamp(1rem, 4vh, 2rem);
+            }
+            
+            .moon {
+                width: clamp(40px, 8vh, 80px);
+                height: clamp(40px, 8vh, 80px);
+                top: clamp(2%, 4vh, 6%);
+            }
+        }
+
+        /* Mejora de estilos para el reproductor de audio */
+        .audio-container {
+            position: absolute;
+            top: 4vw;
+            left: 50%;
+            transform: translateX(-50%);
+            width: clamp(220px, 60vw, 400px);
+            padding: 12px 0 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            backdrop-filter: blur(8px);
+            transition: background 0.9s;
+            background: transparent; /* Fondo transparente */
+        }
+        .audio-container audio {
+            width: 92%;
+            accent-color: #ffd54f;
+            filter: drop-shadow(0 2px 8px #ffe08255);
+            background: transparent;
+            border-radius: 8px;
+        }
+        .audio-container audio::-webkit-media-controls-panel {
+            background: transparent; /* Fondo transparente en controles */
+            border-radius: 8px;
+        }
+        .audio-container audio::-webkit-media-controls-play-button,
+        .audio-container audio::-webkit-media-controls-current-time-display,
+        .audio-container audio::-webkit-media-controls-time-remaining-display,
+        .audio-container audio::-webkit-media-controls-timeline,
+        .audio-container audio::-webkit-media-controls-volume-slider {
+            filter: drop-shadow(0 0 2px #ffd54f88);
+        }
+        .audio-container audio::-webkit-media-controls-play-button {
+            background-color: #ffd54f;
+            border-radius: 50%;
+        }
+        .audio-container audio::-webkit-media-controls-timeline {
+            background: #ffe08255;
+            border-radius: 4px;
+        }
+        .audio-container audio::-webkit-media-controls-volume-slider {
+            background: #ffd54f33;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .audio-container {
+                top: 8px;
+                width: 350px;
+                padding: 8px 0 7px 0;
+                margin-top: 250px;
+            }
+        }
+        @media (max-width: 480px) {
+            .audio-container {
+                top: 4px;
+                width: 350px;
+                padding: 5px 0 4px 0;
+                margin-top: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Moved moon to create better visual hierarchy -->
+    <div class="moon"></div>
+
+    <!-- Planeta de pasto con efecto 3D -->
+    <div class="grass-circle"></div>
+
+    <!-- Reemplazado YouTube por reproductor de audio local -->
+    <div class="audio-container">
+        <audio controls autoplay loop>
+            <source src="NeverBeAlone.mp3" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <!-- Moved title to bottom with enhanced styling -->
+    <div class="main-title">You're the one</div>
+
+    <script>
+        const starCount = Math.min(120, Math.floor((window.innerWidth * window.innerHeight) / 12000));
+        for(let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            const size = Math.random() * 8 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.animationDelay = Math.random() * 8 + 's';
+            document.body.appendChild(star);
+        }
+
+        const cometCount = Math.min(6, Math.floor(window.innerWidth / 250));
+        for(let i = 0; i < cometCount; i++) {
+            const comet = document.createElement('div');
+            comet.className = 'comet';
+            comet.style.top = Math.random() * 50 + '%';
+            comet.style.animationDelay = Math.random() * 8 + 's';
+            comet.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            document.body.appendChild(comet);
+        }
+
+        function createFlowers() {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const radius = Math.min(window.innerWidth, window.innerHeight) * (window.innerWidth < 480 ? 0.18 : 0.22);
+
+            // Flor central más grande y mejor posicionada
+            const centerFlower = document.createElement('div');
+            centerFlower.className = 'flower center';
+            const centerFlowerSize = Math.min(window.innerWidth, window.innerHeight) * 0.15;
+            const centerYOffset = window.innerWidth < 768 ? centerY + (window.innerHeight * 0.08) : centerY;
+            centerFlower.style.left = centerX - centerFlowerSize/2 + 'px';
+            centerFlower.style.top = centerYOffset - centerFlowerSize/2 + 'px';
+            centerFlower.style.animationDelay = '0s';
+
+            // Crear pétalos para flor central
+            for(let i = 0; i < 8; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.style.setProperty('--rotation', (i * 45) + 'deg');
+                petal.style.animationDelay = (i * 0.1) + 's';
+                centerFlower.appendChild(petal);
+            }
+
+            // Crear centro de la flor central
+            const centerFlowerCenter = document.createElement('div');
+            centerFlowerCenter.className = 'flower-center';
+            centerFlower.appendChild(centerFlowerCenter);
+
+            document.body.appendChild(centerFlower);
+
+            const flowerCount = window.innerWidth < 360 ? 5 : window.innerWidth < 480 ? 6 : window.innerWidth < 768 ? 7 : 10;
+            for(let i = 0; i < flowerCount; i++) {
+                const angle = (i * (360/flowerCount)) * (Math.PI / 180);
+                const flowerSize = Math.min(window.innerWidth, window.innerHeight) * 0.09;
+                const x = centerX + Math.cos(angle) * radius - flowerSize/2;
+                const y = centerYOffset + Math.sin(angle) * radius - flowerSize/2;
+
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.style.left = x + 'px';
+                flower.style.top = y + 'px';
+                flower.style.animationDelay = (i * 0.15) + 's';
+
+                // Crear pétalos
+                for(let j = 0; j < 8; j++) {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.style.setProperty('--rotation', (j * 45) + 'deg');
+                    petal.style.animationDelay = (i * 0.15 + j * 0.08) + 's';
+                    flower.appendChild(petal);
+                }
+
+                // Crear centro de la flor
+                const flowerCenter = document.createElement('div');
+                flowerCenter.className = 'flower-center';
+                flower.appendChild(flowerCenter);
+
+                document.body.appendChild(flower);
+            }
+        }
+
+        createFlowers();
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                // Remove existing flowers
+                document.querySelectorAll('.flower').forEach(flower => flower.remove());
+                // Recreate flowers with new positioning
+                createFlowers();
+            }, 250);
+        });
+    </script>
+</body>
+</html>
